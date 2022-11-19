@@ -1,0 +1,29 @@
+<div class="container">
+  <div class="heading-container">
+    <h1><span>Cricket </span> <span>Word Search</span></h1>
+  </div>
+  <div class="body-container">
+    <div class="find-word-container">
+     <h2>Find the words</h2>
+      <div class="word-container">
+        <p *ngFor="let item of crickArray" [ngStyle]="{'text-decoration': item.isFound?'line-through': null}" >{{item.name}}</p>
+      </div>
+    </div>
+    <div class="search-matrix-container">
+       <form  class="search-container" [formGroup]="searchForm" (submit)="onSubmit()">
+         <div class="input-field">
+           <input placeholder="Enter the words" formControlName="search" type="text">
+           <span *ngIf="notFound">Word does not exist</span>
+         </div>
+       <button>SUBMIT</button>
+       </form>
+      <div class="matrix-container">
+        <table>
+          <tr *ngFor="let row of wordGrid; let i =index">
+            <td *ngFor = 'let field of row; let j = index ' [ngStyle]="{'background-color': highlightedCoordinates[i + ','+ j] ? 'yellow' : null }">{{field}}</td>
+          </tr>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
