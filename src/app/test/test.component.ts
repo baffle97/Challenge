@@ -117,14 +117,17 @@ export class TestComponent implements OnInit {
   }
 
   onSubmit(){
+    this.foundString ='';
     let searchString = this.searchForm.get('search')?.value;
     searchString = searchString.toUpperCase();
     if(searchString) {
        for(let i=0;i<this.crickArray.length;i++){
          if(this.crickArray[i].name == searchString){
-            this.crickArray[i].isFound = true;
-            this.checkTrueCount+=1;
-            this.foundString = searchString;
+           this.foundString = searchString;
+            if(this.crickArray[i].isFound == false){
+              this.checkTrueCount+=1;
+              this.crickArray[i].isFound = true;
+            }
             if(this.checkTrueCount == this.crickArray.length){
               setTimeout(()=>{
                 this.openModal();
@@ -135,7 +138,6 @@ export class TestComponent implements OnInit {
       }
        if(this.foundString){
          this.onSearchinMatrix(this.foundString.replace(/\s/g, ''))
-
        } else {
          this.notFound = true;
          setTimeout(()=>{
