@@ -105,6 +105,7 @@ export class TestComponent implements OnInit {
 
    rowLen:any;
    colLen:any;
+   foundString:any;
 
 
   ngOnInit(): void {
@@ -121,10 +122,18 @@ export class TestComponent implements OnInit {
        for(let i=0;i<this.crickArray.length;i++){
          if(this.crickArray[i].name == searchString){
             this.crickArray[i].isFound = true;
-           this.onSearchinMatrix(searchString.replace(/\s/g, ''))
+            this.foundString = searchString;
          }
-
       }
+       if(this.foundString){
+         this.onSearchinMatrix(this.foundString.replace(/\s/g, ''))
+
+       } else {
+         this.notFound = true;
+         setTimeout(()=>{
+           this.notFound = false;
+         }, 3000)
+       }
 
     }
   }
