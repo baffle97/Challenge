@@ -106,6 +106,7 @@ export class TestComponent implements OnInit {
    rowLen:any;
    colLen:any;
    foundString:any;
+   checkTrueCount:number=0;
 
 
   ngOnInit(): void {
@@ -122,7 +123,14 @@ export class TestComponent implements OnInit {
        for(let i=0;i<this.crickArray.length;i++){
          if(this.crickArray[i].name == searchString){
             this.crickArray[i].isFound = true;
+            this.checkTrueCount+=1;
             this.foundString = searchString;
+            if(this.checkTrueCount == this.crickArray.length){
+              setTimeout(()=>{
+                this.openModal();
+              },1000)
+
+            }
          }
       }
        if(this.foundString){
