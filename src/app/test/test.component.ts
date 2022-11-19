@@ -1,14 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormControl } from '@angular/forms';
-import {compareNumbers} from "@angular/compiler-cli/src/version_helpers";
+import { MdbModalRef, MdbModalService } from 'mdb-angular-ui-kit/modal';
+import {ModalComponent} from "../modal/modal.component";
+
 @Component({
   selector: 'app-test',
   templateUrl: './test.component.html',
   styleUrls: ['./test.component.scss']
 })
 export class TestComponent implements OnInit {
+  modalRef: MdbModalRef<ModalComponent> | null = null;
 
-  constructor() { }
+  constructor(private modalService: MdbModalService) { }
    crickArray:any= [
      {
     name:  'BOWLING',
@@ -217,6 +220,9 @@ export class TestComponent implements OnInit {
          this.highlightedCoordinates[`${startingObj.row-i},${ startingObj.col-i}`]= true
        }
      }
+  }
+  openModal() {
+    this.modalRef = this.modalService.open(ModalComponent)
   }
 
 }
